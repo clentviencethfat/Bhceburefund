@@ -1,0 +1,203 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cebu Boarding House Refund</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<main class="container">
+    <header class="topbar">
+        <div>
+            <p class="eyebrow">BOARDING HOUSE ADMIN</p>
+            <h1>Refund Manager</h1>
+            <p>Track tenant refunds and calculate deductions automatically.</p>
+        </div>
+        <span id="todayDate"></span>
+    </header>
+
+    <section class="panel">
+        <h2>Tenant Information</h2>
+
+        <div class="form-grid">
+            <label>Tenant Full Name
+                <input id="tenantName" type="text" placeholder="Tenant name">
+            </label>
+
+            <label>Boarding House
+                <input id="boardingHouse" type="text" placeholder="Boarding house name">
+            </label>
+
+            <label>Room Number
+                <input id="roomNumber" type="text" placeholder="Room number">
+            </label>
+
+            <label>Checkout Date
+                <input id="checkoutDate" type="date">
+            </label>
+
+            <label>Checkout Time
+                <input id="checkoutTime" type="time">
+            </label>
+
+            <label>Refund Status
+                <select id="refundStatus">
+                    <option>Draft</option>
+                    <option>For review</option>
+                    <option>Refunded</option>
+                    <option>No refund due</option>
+                </select>
+            </label>
+        </div>
+    </section>
+
+    <section class="panel">
+        <h2>Security Deposit</h2>
+        <label class="deposit-field">
+            Security Deposit (₱)
+            <input id="deposit" type="number" min="0"
+                   step="0.01" placeholder="0.00">
+        </label>
+    </section>
+
+    <section class="panel">
+        <div class="section-heading">
+            <div>
+                <h2>Charges and Deductions</h2>
+                <p>Add all charges that will be deducted from the deposit.</p>
+            </div>
+            <button class="button secondary" id="addCharge" type="button">
+                + Add Charge
+            </button>
+        </div>
+
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Description</th>
+                        <th>Amount (₱)</th>
+                        <th class="no-print">Action</th>
+                    </tr>
+                </thead>
+                <tbody id="chargesBody"></tbody>
+            </table>
+        </div>
+
+        <div class="quick-add">
+            <span>Quick add:</span>
+            <button type="button" data-charge="Electricity Bill">Electricity</button>
+            <button type="button" data-charge="Water Bill">Water</button>
+            <button type="button" data-charge="Unpaid Rent">Rent</button>
+            <button type="button" data-charge="Cleaning Fee">Cleaning</button>
+            <button type="button" data-charge="Repair / Damages">Repairs</button>
+            <button type="button" data-charge="Aircon Cleaning">Aircon</button>
+            <button type="button" data-charge="Repainting Fee">Repainting</button>
+            <button type="button" data-charge="Lost Key">Lost Key</button>
+        </div>
+    </section>
+
+    <section class="summary-grid">
+        <div class="panel">
+            <h2>Refund Summary</h2>
+
+            <div class="sum-line">
+                <span>Security Deposit</span>
+                <strong id="depositTotal">₱0.00</strong>
+            </div>
+
+            <div class="sum-line">
+                <span>Total Deductions</span>
+                <strong id="deductionTotal">₱0.00</strong>
+            </div>
+
+            <div class="sum-line final">
+                <span>Final Refund</span>
+                <strong id="refundTotal">₱0.00</strong>
+            </div>
+
+            <p id="balanceNote" class="note">
+                Enter the deposit and charges.
+            </p>
+
+            <div class="sum-line">
+                <span>Extra Balance Owed</span>
+                <strong id="owedTotal">₱0.00</strong>
+            </div>
+        </div>
+
+        <div class="panel">
+            <h2>Notes</h2>
+            <textarea id="notes" rows="5"
+                placeholder="Additional notes or explanations..."></textarea>
+        </div>
+    </section>
+
+    <section class="panel">
+        <h2>Manage Refund Records</h2>
+        <p class="small-note">
+            Saved records are stored in this browser on this device.
+        </p>
+
+        <div class="actions">
+            <button class="button primary" id="saveRecord" type="button">
+                Save Refund
+            </button>
+
+            <button class="button secondary" id="newRecord" type="button">
+                New Record
+            </button>
+
+            <button class="button secondary" id="exportCsv" type="button">
+                Export CSV
+            </button>
+
+            <button class="button secondary" id="printRecord" type="button">
+                Print / Save PDF
+            </button>
+
+            <button class="button secondary" id="exportJson" type="button">
+                Backup Records
+            </button>
+
+            <label class="button secondary import-label">
+                Import Backup
+                <input id="importJson" type="file"
+                       accept=".json,application/json" hidden>
+            </label>
+
+            <button class="button danger" id="clearRecords" type="button">
+                Delete All Records
+            </button>
+        </div>
+
+        <p id="message" role="status"></p>
+
+        <div class="table-wrap">
+            <table class="records-table">
+                <thead>
+                    <tr>
+                        <th>Tenant</th>
+                        <th>Room / Location</th>
+                        <th>Checkout</th>
+                        <th>Deposit</th>
+                        <th>Deductions</th>
+                        <th>Refund</th>
+                        <th>Status</th>
+                        <th class="no-print">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="recordsBody"></tbody>
+            </table>
+        </div>
+    </section>
+
+    <footer>Boarding House Refund Manager</footer>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
